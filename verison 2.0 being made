@@ -1,0 +1,65 @@
+# Improved user management and login system
+
+users = [
+    {"ID": 1, "Name": "Second, First", "AccountType": "Student"},
+    {"ID": 2, "Name": "Second, First1", "AccountType": "Student"},
+    # ... (other users)
+    {"ID": 26, "Name": "Second, First24", "AccountType": "Student"}
+]
+
+accounts = {
+    "admin": {"password": "admin", "role": "Admin"},
+    "teacher": {"password": "teacher", "role": "Teacher"},
+    "student": {"password": "student", "role": "Student"}
+}
+
+classrooms = {
+    "default": {"students": [1, 2, 3], "teacher": "teacher", "attendance": {}}
+}
+
+def generate_user_id():
+    return len(users) + 1
+
+def login():
+    while True:
+        username = input("Username: ")
+        password = input("Password: ")
+
+        if username in accounts:
+            if password == accounts[username]["password"]:
+                role = accounts[username]["role"]
+                if role == "Admin":
+                    admin_access()
+                elif role == "Teacher":
+                    teacher_access()
+                elif role == "Student":
+                    student_access(username)
+            else:
+                print("Invalid password. Please try again.")
+        else:
+            print("Invalid username. Please try again.")
+
+def admin_access():
+    print("\nWelcome, Admin!")
+    while True:
+        print("\nAdmin Menu:")
+        print("1. Add a student to a class")
+        print("2. Remove a student from a class")
+        print("3. Create a new class")
+        print("4. Assign a teacher to a class")
+        print("5. Exit")
+        choice = input("Select an option: ")
+        if choice == "5":
+            break
+        # Implement other options...
+
+def teacher_access():
+    print("\nWelcome, Teacher!")
+    # Implement teacher access functionality...
+
+def student_access(username):
+    print(f"\nWelcome, {username}!")
+    # Implement student access functionality...
+
+# Start the login process
+login()
